@@ -1,46 +1,50 @@
 # Library-Management-Tkinter
 
-A simple desktop Library Management System built with Python and Tkinter for GUI.  
-This application allows users to add, lend, return, remove, and view books in a library, including eBooks.
-
----
+A simple desktop Library Management System built with Python and Tkinter. Manage physical books and eBooks by adding, lending, returning, removing, and searching by author through an intuitive GUI.
 
 ## Features
 
 - Add physical books and eBooks (with download size)
-- Lend and return books by ISBN
-- Remove books from the library
-- View available books and search books by author
-- User-friendly GUI with input validation and error handling
+- Lend and return books with availability checks
+- Remove books by ISBN
+- Search books by author
+- View live inventory of available books
 
----
-
-## Technologies Used
+## Technologies
 
 - Python 3.x
-- Tkinter (for GUI)
+- Tkinter for GUI
+- Custom exception handling for lending logic
 
----
+## Project Structure
 
-## Files
+Library-Management-Tkinter/
+├── book_library.py # Core classes and exceptions
+├── gui_app.py # Tkinter GUI frontend
+└── README.md # Project documentation
 
-- `book_library.py`: Core library classes handling book data and logic
-- `gui_app.py`: Tkinter-based GUI application using `book_library.py`
+## Setup
 
----
+It is recommended to create a Python virtual environment before running the app:
 
-## Getting Started
+```bash
+python -m venv venv
+source venv/bin/activate     # On Windows: venv\Scripts\activate
+```
 
-### Prerequisites
+This project uses only Python’s standard libraries (Tkinter), so no additional packages are needed.
 
-- Python 3.x installed  
-- Tkinter (usually included with standard Python installations)
+## Usage
 
-### How to Run
-
-1. Clone or download the repository.
-2. Open terminal/command prompt in the project directory.
-3. Run the GUI application:
+Run the GUI application:
 
 ```bash
 python gui_app.py
+```
+
+## Future Enhancements
+
+- Persistent data storage (file or database)
+- User authentication and lending history
+- Advanced search and filtering
+- Support for multiple copies per book

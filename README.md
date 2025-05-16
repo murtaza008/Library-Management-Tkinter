@@ -55,5 +55,5 @@ This project uses only standard Python libraries (Tkinter), so no external packa
 To run the GUI application:
 
 ```bash
-python gui_app_tkinter.py
+python gui_app.py
 ```

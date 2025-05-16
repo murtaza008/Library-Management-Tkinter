@@ -1,5 +1,5 @@
 # book_library.py
-# Murtaza Mazhar 
+# Murtaza Mazhar
 # F2022065163
 # Custom exception for unavailable book lending
 class BookNotAvailableError(Exception):
@@ -22,6 +22,9 @@ class Library:
         self.books = []
 
     def add_book(self, book):
+        # Check for duplicate ISBN
+        if any(b.isbn == book.isbn for b in self.books):
+            raise ValueError("A book with this ISBN already exists.")
         self.books.append(book)
 
     def remove_book(self, isbn):

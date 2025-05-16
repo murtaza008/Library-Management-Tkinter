@@ -26,10 +26,12 @@ A simple desktop Library Management System built with Python and Tkinter. This i
 
 ## 📁 Project Structure
 
+```
 Library-Management-Tkinter/
 ├── book_library.py # Core classes and custom exceptions
 ├── gui_app_tkinter.py # Tkinter GUI frontend
 └── README.md # Project documentation
+```
 
 ---
 
@@ -58,7 +60,7 @@ python gui_app_tkinter.py
 
 ---
 
-##📌 Future Enhancements
+## 📌 Future Enhancements
 
 💾 Persistent data storage (file or database)
 🔐 User authentication and lending history

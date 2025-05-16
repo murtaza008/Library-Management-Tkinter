@@ -1,5 +1,5 @@
 # gui_app_tkinter.py
-# Murtaza Mazhar 
+# Murtaza Mazhar
 # F2022065163
 import tkinter as tk
 from tkinter import messagebox, simpledialog
@@ -38,8 +38,17 @@ def add_book():
     else:
         book = Book(title, author, isbn)
 
-    library.add_book(book)
-    messagebox.showinfo("Success", f"Book '{title}' added.")
+    try:
+        library.add_book(book)
+        messagebox.showinfo("Success", f"Book '{title}' added.")
+        title_entry.delete(0, tk.END)
+        author_entry.delete(0, tk.END)
+        isbn_entry.delete(0, tk.END)
+        size_entry.delete(0, tk.END)
+        ebook_var.set(False)
+        toggle_size_entry()
+    except ValueError as e:
+        messagebox.showerror("Error", str(e))
     update_book_list()
 
 def lend_book():
@@ -77,15 +86,25 @@ def view_books_by_author():
         if books:
             listbox.insert(tk.END, f"Books by {author}:")
             for book in books:
-                listbox.insert(tk.END, str(book))
+                status = "Available" if not book.is_lent else "Lent"
+                if isinstance(book, EBook):
+                    entry = f"[eBook] {book.title} by {book.author} (ISBN: {book.isbn}, {book.download_size}MB) [{status}]"
+                else:
+                    entry = f"[Book] {book.title} by {book.author} (ISBN: {book.isbn}) [{status}]"
+                listbox.insert(tk.END, entry)
         else:
             listbox.insert(tk.END, "No books found.")
 
 def update_book_list():
     listbox.delete(0, tk.END)
-    listbox.insert(tk.END, "Available Books:")
-    for book in library:
-        listbox.insert(tk.END, str(book))
+    listbox.insert(tk.END, "Library Inventory:")
+    for book in library.books:
+        status = "Available" if not book.is_lent else "Lent"
+        if isinstance(book, EBook):
+            entry = f"[eBook] {book.title} by {book.author} (ISBN: {book.isbn}, {book.download_size}MB) [{status}]"
+        else:
+            entry = f"[Book] {book.title} by {book.author} (ISBN: {book.isbn}) [{status}]"
+        listbox.insert(tk.END, entry)
 
 tk.Label(root, text="Title:").pack()
 title_entry = tk.Entry(root)
@@ -112,6 +131,7 @@ tk.Button(root, text="Lend Book", command=lend_book).pack(pady=5)
 tk.Button(root, text="Return Book", command=return_book).pack(pady=5)
 tk.Button(root, text="Remove Book", command=remove_book).pack(pady=5)
 tk.Button(root, text="Books by Author", command=view_books_by_author).pack(pady=5)
+tk.Button(root, text="View All Books", command=update_book_list).pack(pady=5)
 
 tk.Label(root, text="Library Inventory:").pack()
 listbox = tk.Listbox(root, width=70)
